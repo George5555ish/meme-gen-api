@@ -1,0 +1,10 @@
+openai
+feedparser
+flask
+pillow
+requests
+schedule
+pymongo
+serpapi
+jiter
+setuptools
