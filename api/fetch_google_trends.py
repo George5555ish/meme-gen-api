@@ -5,8 +5,7 @@ import time
 from openai import OpenAI  
 from flask import Flask, jsonify 
 import pymongo
-from serpapi import GoogleSearch
-from datetime import datetime 
+from serpapi import GoogleSearch 
 import os
 app = Flask(__name__)
 
@@ -109,7 +108,7 @@ def save_trends_to_mongo(trends, source):
     for trend in trends:
         if not trends_collection.find_one({"topic": trend["topic"]}):
             trend["source"] = source
-            trend["timestamp"] = datetime.utcnow() 
+            trend["timestamp"] = time.time()
             trends_collection.insert_one(trend)
             count += 1
 
