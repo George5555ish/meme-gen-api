@@ -130,4 +130,4 @@ def fetch_google_trends():
     return jsonify({"message": "Google Trends fetched!",'data':google_trends})
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)

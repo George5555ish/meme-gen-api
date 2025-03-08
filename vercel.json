@@ -1,5 +1,10 @@
 {
     "version": 2,
-    "builds": [{ "src": "api/index.py", "use": "@vercel/python" }],
-    "routes": [{ "src": "/.*", "dest": "api/index.py" }]
-  }
+    "builds": [{ "src": "api/*.py", "use": "@vercel/python" }],
+    "routes": [
+        { "src": "/api/fetch_google_news", "dest": "api/fetch_google_news.py" },
+        { "src": "/api/fetch_google_trends", "dest": "api/fetch_google_trends.py" },
+        { "src": "/api/generate_meme", "dest": "api/generate_meme.py" },
+        { "src": "/.*", "dest": "api/index.py" }
+    ]
+}

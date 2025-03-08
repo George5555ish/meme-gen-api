@@ -117,5 +117,5 @@ def fetch_google_news():
     return jsonify({"message": "Google News fetched!", "data": google_news})
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
      
