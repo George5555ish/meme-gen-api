@@ -60,18 +60,7 @@ MEME_LIBRARY = {
         "meme_name": "crying wojak",
          "font_size": 25,
     }
-}
-
-def testing_mongo():
-    """Testing MongoDB connection and insertion."""
-
-    # Fetch all documents
-    all_trends = list(trends_collection.find())
-    print("All Trends:", all_trends)
-
-    # Fetch specific document
-    python_trend = trends_collection.find_one({"topic": "AI Memes"})
-    print("Python Trend:", python_trend)
+} 
 
 def get_google_news():
     print("Fetching Google News...")
@@ -106,7 +95,7 @@ def fetch_google_news():
     # Your Google Trends logic here
     google_news = get_google_news()
     save_trends_to_mongo(google_news, source_dict["google_news"])
-    return jsonify({"message": "Google News fetched!", "data": google_news})
+    return jsonify({"message": "Google News fetched!", "data": [news["topic"] for news in google_news]})
 
 if __name__ == "__main__":
     app.run(debug=True)
