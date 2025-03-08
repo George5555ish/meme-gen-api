@@ -2,18 +2,11 @@ import sys
 sys.path.append('/opt/python')
 
 import time
-from openai import OpenAI 
-import feedparser  # Parses RSS feeds
-from flask import Flask, jsonify, send_file
-from PIL import Image, ImageDraw, ImageFont
-import random 
-import requests
-import schedule
-from io import BytesIO 
+from openai import OpenAI  
+from flask import Flask, jsonify 
 import pymongo
 from serpapi import GoogleSearch
-from datetime import datetime
-import base64
+from datetime import datetime 
 import os
 app = Flask(__name__)
 

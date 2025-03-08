@@ -4,16 +4,8 @@ sys.path.append('/opt/python')
 import time
 from openai import OpenAI 
 import feedparser  # Parses RSS feeds
-from flask import Flask, jsonify, send_file
-from PIL import Image, ImageDraw, ImageFont
-import random 
-import requests
-import schedule
-from io import BytesIO 
-import pymongo
-from serpapi import GoogleSearch
-from datetime import datetime
-import base64
+from flask import Flask, jsonify 
+import pymongo   
 import os
 app = Flask(__name__)
 
@@ -103,7 +95,7 @@ def save_trends_to_mongo(trends, source):
     for trend in trends:
         if not trends_collection.find_one({"topic": trend["topic"]}):
             trend["source"] = source
-            trend["timestamp"] = datetime.utcnow() 
+            trend["timestamp"] = time.time()
             trends_collection.insert_one(trend)
             count += 1
 
