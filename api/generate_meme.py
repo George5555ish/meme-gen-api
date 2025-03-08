@@ -2,17 +2,12 @@ import sys
 sys.path.append('/opt/python')
 
 import time
-from openai import OpenAI 
-import feedparser  # Parses RSS feeds
-from flask import Flask, jsonify, send_file
+from openai import OpenAI  
+from flask import Flask, jsonify 
 from PIL import Image, ImageDraw, ImageFont
-import random 
-import requests
-import schedule
+import random  
 from io import BytesIO 
-import pymongo
-from serpapi import GoogleSearch
-from datetime import datetime
+import pymongo  
 import base64
 import os
 app = Flask(__name__)
@@ -238,7 +233,7 @@ def generate_meme():
         "captions": captions,
         "meme_template": meme_name,
         "source": google_trend["source"],
-        "timestamp": datetime.utcnow(),
+        "timestamp": time.time(),
         "image_base64": meme_image_base64
     })
 
