@@ -200,7 +200,7 @@ def add_captions_to_image(meme_filename, captions):
     return meme_filepath, meme_base64
 
 
-@app.route("/",  methods=["POST"])
+@app.route("/api/generate_meme",  methods=["POST"])
 def generate_meme():
     """Full pipeline: Fetch trends, select a meme, generate captions, and overlay text."""
     print("📡 Fetching trending topics...") 
