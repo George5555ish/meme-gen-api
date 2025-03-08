@@ -1,6 +1,7 @@
 openai
 feedparser
 flask
+flask_cors
 pillow
 requests
 schedule
