@@ -109,7 +109,7 @@ def save_trends_to_mongo(trends, source):
 
     print(f"✅ {count} {source} trends saved to MongoDB.")
 
-@app.route("/", methods=["POST"])
+@app.route("/api/fetch_google_news", methods=["POST"])
 def fetch_google_news():
     # Your Google Trends logic here
     google_news = get_google_news()
