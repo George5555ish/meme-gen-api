@@ -133,7 +133,7 @@ def fetch_google_trends():
     save_trends_to_mongo(google_trends, source_dict["serpapi"])
     if len(google_trends) < 1:
         print(f"❌ No {source_dict["serpapi"]} trends fetched.") 
-        return jsonify({"message": "Google Trends not found",'data': None})
+        return jsonify({"message": "Google Trends not found",'data': None, "python_version": sys.version})
     return jsonify({"message": "Google Trends fetched!",'data': google_trends[:5]})
 
 if __name__ == "__main__":

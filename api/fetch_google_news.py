@@ -100,6 +100,9 @@ def fetch_google_news():
     # Your Google Trends logic here
     google_news = get_google_news()
     save_trends_to_mongo(google_news, source_dict["google_news"])
+    if len(google_news) < 1:
+        print(f"❌ No {source_dict["serpapi"]} trends fetched.") 
+        return jsonify({"message": "Google news not found",'data': None, "python_version": sys.version})
     return jsonify({"message": "Google News fetched!", "data": [news["topic"] for news in google_news]})
 
 if __name__ == "__main__":
