@@ -1,0 +1,21 @@
+name: Trigger Meme Generator API
+
+on:
+  schedule:
+    - cron: '0 */8 * * *'  # Every 8 hours (Google Trends)
+    - cron: '0 */3 * * *'  # Every 3 hours (Google News)
+    - cron: '0 */1 * * *'  # Every 1 hour (Generate Meme)
+  workflow_dispatch:  # Allows manual runs
+
+jobs:
+  call-api:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call Google News Fetcher 
+        run: curl -X POST "https://your-project.vercel.app/fetch_google_news"
+
+      - name: Call Google Trends Fetcher From Serpapi
+        run: curl -X POST "https://your-project.vercel.app/fetch_google_trends"
+
+      - name: Call Meme Generator
+        run: curl -X POST "https://your-project.vercel.app/generate_meme"
