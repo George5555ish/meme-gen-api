@@ -50,7 +50,7 @@ MEME_LIBRARY = {
         "meme_name": "i fear no man"
     },
     "distracted_boyfriend.jpg": {
-        "captions": 1,
+        "captions": 3,
         "positions": [{"x": 30, "y": 350},{"x": 130, "y": 350},{"x": 180, "y": 350}],
         "order": ["left_bottom", "center_bottom", "right_bottom"],
         "font_size": 16,
