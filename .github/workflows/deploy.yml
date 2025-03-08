@@ -12,10 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Call Google News Fetcher 
-        run: curl -X POST "https://your-project.vercel.app/api/fetch_google_news"
+        run: curl -X POST "https://meme-gen-api.vercel.app/api/fetch_google_news"
 
       - name: Call Google Trends Fetcher From Serpapi
-        run: curl -X POST "https://your-project.vercel.app/api/fetch_google_trends"
+        run: curl -X POST "https://meme-gen-api.vercel.app/api/fetch_google_trends"
 
       - name: Call Meme Generator
-        run: curl -X POST "https://your-project.vercel.app/api/generate_meme"
+        run: curl -X POST "https://meme-gen-api.vercel.app/api/generate_meme"
