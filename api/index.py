@@ -7,7 +7,7 @@ import base64
 import io
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
+CORS(app, resources={r"/*": {"origins": "https://meme-gen-frontend.vercel.app"}})
 # MongoDB connection
 MONGO_URI = os.getenv("MONGO_URI")
 
