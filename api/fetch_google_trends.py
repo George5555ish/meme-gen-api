@@ -5,7 +5,7 @@ import time
 from openai import OpenAI  
 from flask import Flask, jsonify 
 import pymongo
-from serpapi import GoogleSearch 
+from serpapi import GoogleSearch
 import os
 from bson import ObjectId
 
@@ -20,10 +20,7 @@ trends_collection = db["trending_topics"]  # Collection
 memes_collection = db["memes"]  # Collection
 
 # 🔥 API Keys
-SERPAPI_KEY = os.getenv("SERPAPI_KEY")
-OPENAI_API_KEY = "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"
-
-openai_client = OpenAI(api_key=OPENAI_API_KEY)
+SERPAPI_KEY = os.getenv("SERPAPI_KEY") 
 
 # ########################## TYPES  ###########################
  
