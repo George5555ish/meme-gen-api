@@ -111,15 +111,20 @@ def save_trends_to_mongo(trends, source):
         print(f"❌ No {source} trends to save.")
         return
 
-    count = 0
-    for trend in trends:
-        if not trends_collection.find_one({"topic": trend["topic"]}):
-            trend["source"] = source
-            trend["timestamp"] = time.time()
-            trends_collection.insert_one(trend)
-            count += 1
-
-    print(f"✅ {count} {source} trends saved to MongoDB.")
+    # Fetch existing topics to avoid duplicate inserts
+    existing_topics = set(trends_collection.distinct("topic"))
+    
+    # Filter trends that are not already in the collection
+    new_trends = [
+        {**trend, "source": source, "timestamp": time.time()} 
+        for trend in trends if trend["topic"] not in existing_topics
+    ]
+    
+    if new_trends:
+        trends_collection.insert_many(new_trends)
+        print(f"✅ {len(new_trends)} {source} trends saved to MongoDB.")
+    else:
+        print(f"ℹ️ No new {source} trends to save.")
 
 @app.route("/api/fetch_google_trends", methods=["POST"])
 def fetch_google_trends():
