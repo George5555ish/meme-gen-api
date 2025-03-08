@@ -206,13 +206,13 @@ def generate_meme():
     print("📡 Fetching trending topics...") 
 
     # Get the first unused Google Trend (isGenerated=False)
-    google_trend = trends_collection.find_one({"source": source_dict["serpapi"], "isGenerated": False})
+    google_trend = trends_collection.find_one({"source": source_dict["serpapi"], "isGenerated": False}).sort("timestamp", -1)  # Sort by timestamp, newest first
 
     # If no unused Google Trend is available, fall back to Google News
     if not google_trend:
         google_trend = trends_collection.find_one(
-        {"source": source_dict["google_news"], "isGenerated": False,}   # Sort by timestamp, newest first
-        )
+        {"source": source_dict["google_news"], "isGenerated": False,}    
+        ).sort("timestamp", -1)  # Sort by timestamp, newest first
 
     if not google_trend:
         print("❌ No trends available for meme generation.")

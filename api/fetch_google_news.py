@@ -29,9 +29,9 @@ memes_collection = db["memes"]  # Collection
 
 # 🔥 API Keys
 SERPAPI_KEY = os.getenv("SERPAPI_KEY")
-api_key = os.getenv("OPENAI_API_KEY")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
-openai_client = OpenAI(api_key=api_key)
+openai_client = OpenAI(api_key=OPENAI_API_KEY)
 
 source_dict = {
     "serpapi": "Google Trends",
@@ -114,7 +114,7 @@ def fetch_google_news():
     # Your Google Trends logic here
     google_news = get_google_news()
     save_trends_to_mongo(google_news, source_dict["google_news"])
-    return jsonify({"message": "Google News fetched!"})
+    return jsonify({"message": "Google News fetched!", "data": google_news})
 
 if __name__ == "__main__":
     app.run()

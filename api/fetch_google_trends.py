@@ -27,9 +27,9 @@ memes_collection = db["memes"]  # Collection
 
 # 🔥 API Keys
 SERPAPI_KEY = os.getenv("SERPAPI_KEY")
-api_key = os.getenv("OPENAI_API_KEY")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
-openai_client = OpenAI(api_key=api_key)
+openai_client = OpenAI(api_key=OPENAI_API_KEY)
 
 # ########################## TYPES  ###########################
  
@@ -127,7 +127,7 @@ def fetch_google_trends():
     # Your Google Trends logic here
     google_trends = get_google_trends_from_serpapi()
     save_trends_to_mongo(google_trends, source_dict["serpapi"])
-    return jsonify({"message": "Google Trends fetched!"})
+    return jsonify({"message": "Google Trends fetched!",'data':google_trends})
 
 if __name__ == "__main__":
     app.run()
