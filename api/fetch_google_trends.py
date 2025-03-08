@@ -110,9 +110,7 @@ def save_trends_to_mongo(trends, source):
     if not trends:
         print(f"❌ No {source} trends to save.")
         return
-    if len(trends) < 1:
-        print(f"❌ No {source} trends fetched.")
-        return
+
     count = 0
     for trend in trends:
         if not trends_collection.find_one({"topic": trend["topic"]}):

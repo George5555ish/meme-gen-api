@@ -249,6 +249,7 @@ def generate_meme():
             {"_id": google_trend["_id"]},
             {"$set": {"isGenerated": True}}
         )
+    return jsonify({"message": "Meme generated!", "meme": meme_name})
  
 
 if __name__ == "__main__":
