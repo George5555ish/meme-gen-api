@@ -22,9 +22,9 @@ memes_collection = db["memes"]  # Collection
 
 # 🔥 API Keys
 SERPAPI_KEY = os.getenv("SERPAPI_KEY")
-api_key = os.getenv("OPENAI_API_KEY")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
-openai_client = OpenAI(api_key=api_key)
+openai_client = OpenAI(api_key=OPENAI_API_KEY)
 
 # ########################## TYPES  ###########################
  
@@ -61,6 +61,13 @@ MEME_LIBRARY = {
         "positions": [{"x": 55, "y": 700}, ],
         "order": ["bottom"],
         "meme_name": "crying wojak",
+         "font_size": 25,
+    },
+    "black-guy-behind-tree.webp": {
+        "captions": 1,
+        "positions": [{"x": 55, "y": 700}, ],
+        "order": ["bottom"],
+        "meme_name": "black guy behind tree",
          "font_size": 25,
     }
 }
