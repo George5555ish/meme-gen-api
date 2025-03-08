@@ -2,7 +2,7 @@ name: Trigger Meme Generator API
 
 on:
   schedule:
-    - cron: '0 */8 * * *'  # Every 8 hours (Google Trends)
+    - cron: '0 */10 * * *'  # Every 8 hours (Google Trends)
     - cron: '0 */3 * * *'  # Every 3 hours (Google News)
     - cron: '0 */1 * * *'  # Every 1 hour (Generate Meme)
   workflow_dispatch:  # Allows manual runs

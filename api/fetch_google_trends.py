@@ -19,7 +19,7 @@ memes_collection = db["memes"]  # Collection
 
 # 🔥 API Keys
 SERPAPI_KEY = os.getenv("SERPAPI_KEY")
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+OPENAI_API_KEY = "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"
 
 openai_client = OpenAI(api_key=OPENAI_API_KEY)
 
@@ -81,8 +81,9 @@ def get_google_trends_from_serpapi():
         search = GoogleSearch(params)
         results = search.get_dict()
         trending_searches = results["trending_searches"] 
-        trends = [{"topic": trend["query"],"timestamp":time.time(),"categories":trend["categories"],"trend_breakdown":trend["trend_breakdown"], "isGenerated": False} for trend in trending_searches]
-        return  trends
+        trends = [{"topic": trend["query"],"timestamp":time.time(),"categories":trend["categories"],"trend_breakdown":None, "isGenerated": False} for trend in trending_searches]
+        print(f"Google Trends at {time.time()}: {trends}")
+        return trends
 
     except Exception as e:
         print("SerpAPI failed:", e)
@@ -119,7 +120,7 @@ def fetch_google_trends():
     # Your Google Trends logic here
     google_trends = get_google_trends_from_serpapi()
     save_trends_to_mongo(google_trends, source_dict["serpapi"])
-    return jsonify({"message": "Google Trends fetched!",'data':google_trends})
+    return jsonify({"message": "Google Trends fetched!",'data':[trend for trend in google_trends]})
 
 if __name__ == "__main__":
     app.run(debug=True)
