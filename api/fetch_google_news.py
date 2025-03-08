@@ -7,6 +7,7 @@ import feedparser  # Parses RSS feeds
 from flask import Flask, jsonify 
 import pymongo   
 import os
+from bson import ObjectId
 app = Flask(__name__)
 
 # ########################## KEYS  ###########################
@@ -61,6 +62,10 @@ MEME_LIBRARY = {
          "font_size": 25,
     }
 } 
+def serialize_objectid(obj):
+    if isinstance(obj, ObjectId):
+        return str(obj)
+    raise TypeError("Type not serializable")
 
 def get_google_news():
     print("Fetching Google News...")

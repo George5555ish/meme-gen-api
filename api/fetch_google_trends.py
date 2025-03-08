@@ -7,6 +7,8 @@ from flask import Flask, jsonify
 import pymongo
 from serpapi import GoogleSearch 
 import os
+from bson import ObjectId
+
 app = Flask(__name__)
 
 
@@ -62,6 +64,13 @@ MEME_LIBRARY = {
     }
 }
 
+def serialize_objectid(obj):
+    print("Serializing ObjectID")
+    print(obj)
+    if isinstance(obj, ObjectId):
+        return str(obj)
+    raise TypeError("Type not serializable")
+
 def get_google_trends_from_serpapi():
     print("Fetching Google Trends from SerpAPI...")
     # google_trends_cat_dict = [
@@ -82,7 +91,7 @@ def get_google_trends_from_serpapi():
         results = search.get_dict()
         trending_searches = results["trending_searches"] 
         trends = [{"topic": trend["query"],"timestamp":time.time(),"categories":trend["categories"],"trend_breakdown":None, "isGenerated": False} for trend in trending_searches]
-        print(f"Google Trends at {time.time()}: {trends}")
+        print(f"Google Trends at {time.time()}: {trends[:2]}")
         return trends
 
     except Exception as e:
@@ -104,7 +113,9 @@ def save_trends_to_mongo(trends, source):
     if not trends:
         print(f"❌ No {source} trends to save.")
         return
-
+    if len(trends) < 1:
+        print(f"❌ No {source} trends fetched.")
+        return
     count = 0
     for trend in trends:
         if not trends_collection.find_one({"topic": trend["topic"]}):
@@ -120,7 +131,10 @@ def fetch_google_trends():
     # Your Google Trends logic here
     google_trends = get_google_trends_from_serpapi()
     save_trends_to_mongo(google_trends, source_dict["serpapi"])
-    return jsonify({"message": "Google Trends fetched!",'data':[trend for trend in google_trends]})
+    if len(google_trends) < 1:
+        print(f"❌ No {source_dict["serpapi"]} trends fetched.") 
+        return jsonify({"message": "Google Trends not found",'data': None})
+    return jsonify({"message": "Google Trends fetched!",'data': google_trends[:5]})
 
 if __name__ == "__main__":
     app.run(debug=True)
